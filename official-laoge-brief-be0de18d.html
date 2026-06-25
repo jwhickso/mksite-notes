@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>老哥网 · 资料整理与信息索引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f4f9fc;
+            color: #1f2e3a;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 20px 0 60px;
+        }
+
+        /* ---- 顶部导航 ---- */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(0, 128, 128, 0.15);
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #1e7e7e;
+            border-radius: 8px 2px 8px 2px;
+        }
+
+        .logo-text {
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: #165a5a;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1f4e5c;
+            font-size: 0.95rem;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: #1e7e7e;
+        }
+
+        /* ---- hero 区 ---- */
+        .hero {
+            margin: 48px 0 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0f3b3b;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: 0 auto;
+            color: #2b4a55;
+            font-size: 1.05rem;
+            background: rgba(30, 126, 126, 0.04);
+            padding: 14px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(30, 126, 126, 0.2);
+        }
+
+        /* ---- 网格卡片（三个场景模块） ---- */
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #165a5a;
+            margin: 48px 0 20px;
+            padding-left: 4px;
+            border-left: 5px solid #1e7e7e;
+            padding-left: 14px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px 20px 28px;
+            box-shadow: 0 4px 12px rgba(0, 60, 60, 0.06);
+            border: 1px solid rgba(30, 126, 126, 0.15);
+            transition: transform 0.15s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 100, 100, 0.08);
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background: #d9f0f0;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 14px;
+            color: #1a6b6b;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0d4040;
+            margin-bottom: 6px;
+        }
+
+        .card p {
+            color: #2f4c57;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+
+        .card ul {
+            margin: 12px 0 0 16px;
+            color: #1b4b4b;
+            font-size: 0.92rem;
+            list-style: square;
+        }
+
+        .card ul li {
+            margin-bottom: 4px;
+        }
+
+        /* ---- 常见说明 (FAQ 摘要) ---- */
+        .faq-section {
+            margin: 50px 0 32px;
+            background: #ecf6f7;
+            border-radius: 24px;
+            padding: 28px 24px;
+        }
+
+        .faq-section h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #134747;
+            margin-bottom: 18px;
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: #0c4040;
+            margin-bottom: 4px;
+        }
+
+        .faq-answer {
+            color: #1d404a;
+            padding-left: 8px;
+            border-left: 3px solid #289b9b;
+            padding-left: 14px;
+        }
+
+        .faq-answer a {
+            color: #117a7a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+        }
+
+        .faq-answer a:hover {
+            color: #0b5e5e;
+        }
+
+        /* ---- 提示 & 附注 ---- */
+        .tip-note {
+            background: #dff0f0;
+            border-radius: 18px;
+            padding: 18px 22px;
+            margin: 32px 0 20px;
+            color: #154545;
+            border-left: 6px solid #289b9b;
+        }
+
+        .footnote {
+            margin-top: 48px;
+            text-align: center;
+            color: #406a6a;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(30, 126, 126, 0.2);
+            padding-top: 28px;
+        }
+
+        .footnote span {
+            background: #d2eaea;
+            padding: 2px 10px;
+            border-radius: 30px;
+        }
+
+        /* ---- 响应式 ---- */
+        @media (max-width: 640px) {
+            body {
+                padding: 0 14px;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+                padding: 12px 16px;
+            }
+
+            .nav-links {
+                gap: 14px;
+                margin-top: 8px;
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-section {
+                padding: 20px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航 -->
+        <nav class="top-nav">
+            <div class="logo-area">
+                <div class="logo-icon"></div>
+                <span class="logo-text">老哥网</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#intro">介绍</a></li>
+                <li><a href="#scenes">场景</a></li>
+                <li><a href="#faq">说明</a></li>
+            </ul>
+        </nav>
+
+        <!-- hero 介绍区 -->
+        <div class="hero" id="intro">
+            <h1>资料整理 · 信息索引</h1>
+            <p>
+                <a href="https://official-laoge.com" style="color:#117a7a; text-decoration: underline; text-underline-offset:3px; font-weight:600;">老哥网</a> 
+                是一个以资料归档和信息梳理为主的站点。不追赶热点，不堆砌广告，只做踏实的分类与聚合。
+            </p>
+        </div>
+
+        <!-- 三个场景模块 -->
+        <h2 class="section-title" id="scenes">三个常用场景</h2>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">📂</div>
+                <h3>按主题归档</h3>
+                <p>将零散信息按领域、子类、标签整理为可检索的目录。适合需要反复查阅某类资料的用户。</p>
+                <ul>
+                    <li>技术文档汇总</li>
+                    <li>工具与资源清单</li>
+                    <li>学习路径参考</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔗</div>
+                <h3>索引与导航</h3>
+                <p>收录经过筛选的链接，并附简短说明，减少重复查找时间。每个条目都保持更新与标注。</p>
+                <ul>
+                    <li>网站 / 文章索引</li>
+                    <li>社区与论坛入口</li>
+                    <li>实用手册集合</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>笔记与备忘</h3>
+                <p>围绕常见问题整理操作步骤、配置要点、核对清单。适合需要快速翻阅的实操场景。</p>
+                <ul>
+                    <li>配置速查</li>
+                    <li>常见错误处理</li>
+                    <li>流程备忘</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 常见说明 (FAQ 摘要) -->
+        <div class="faq-section" id="faq">
+            <h2>常见说明</h2>
+            <div class="faq-item">
+                <div class="faq-question">Q: 资料更新频率如何？</div>
+                <div class="faq-answer">根据内容领域定期复查，失效链接会及时替换或标注。每个分类页底都附有最近检查日期。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 是否可以提交收录建议？</div>
+                <div class="faq-answer">目前通过页面底部的联系方式提交，或直接在对应页面留言。符合收录标准的资源会按类别加入索引。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 与“老哥网”是什么关系？</div>
+                <div class="faq-answer">
+                    该站即为 <a href="https://official-laoge.com">老哥网</a> 的官方说明页。所有核心索引和资料均托管在主站内，这里提供概要引导。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q: 内容偏向哪些领域？</div>
+                <div class="faq-answer">以实用型信息为主：软件工具、网络服务、文档指南、效率方法。不涉及隐私、财务或医疗建议。</div>
+            </div>
+        </div>
+
+        <!-- 提示区域 -->
+        <div class="tip-note">
+            <strong>📌 使用建议：</strong> 如果你在查找某个主题时感到信息混乱，不妨先到 
+            <a href="https://official-laoge.com" style="color:#0a5f5f; font-weight:600;">老哥网</a> 
+            的索引页面看一看。分类目录和标签筛选能帮你快速定位到经过整理的内容。
+        </div>
+
+        <!-- 底部 -->
+        <div class="footnote">
+            <span>信息整理 · 索引优先</span> &nbsp;—&nbsp; 内容基于公开资料与社区贡献，仅供参考。
+        </div>
+    </div>
+</body>
+</html>
