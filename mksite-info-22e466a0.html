@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mk体育 · 从第一眼识别方向</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fde9d2 0%, #fcdab9 40%, #f3c6a0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.8rem;
+            line-height: 1.65;
+            color: #3d2e24;
+        }
+
+        .card {
+            max-width: 860px;
+            width: 100%;
+            background: #fffffffa;
+            backdrop-filter: blur(2px);
+            border-radius: 48px 24px 48px 24px;
+            box-shadow: 0 20px 40px -12px rgba(150, 90, 40, 0.25), 0 8px 20px rgba(0,0,0,0.04);
+            padding: 2.8rem 2.5rem;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 245, 230, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .card { padding: 2rem 1.5rem; border-radius: 32px 16px 32px 16px; }
+        }
+
+        .story-in {
+            font-size: 1.15rem;
+            font-weight: 450;
+            letter-spacing: 0.01em;
+            color: #6b4c34;
+            border-left: 4px solid #e7b68e;
+            padding-left: 1.1rem;
+            margin-bottom: 1.8rem;
+            font-style: italic;
+            background: linear-gradient(to right, #fff7ef, transparent);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .story-in strong {
+            font-weight: 600;
+            color: #a4724a;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 580;
+            letter-spacing: -0.02em;
+            color: #3d281b;
+            margin: 0 0 0.6rem 0;
+            line-height: 1.2;
+        }
+
+        h1 small {
+            display: block;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #7b5b40;
+            margin-top: 0.2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            margin: 1.2rem 0 1.6rem 0;
+            background: rgba(249, 230, 210, 0.3);
+            padding: 1rem 1.4rem;
+            border-radius: 50px 20px 50px 20px;
+            color: #4c382a;
+        }
+
+        .lead a {
+            color: #b57a4a;
+            font-weight: 520;
+            text-decoration: none;
+            border-bottom: 2px solid #e7c5a6;
+            padding: 0 0.15rem;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .lead a:hover {
+            border-bottom-color: #b57a4a;
+            color: #8f6039;
+        }
+
+        .section-title {
+            display: inline-block;
+            font-weight: 540;
+            font-size: 1.25rem;
+            margin: 2rem 0 0.8rem 0;
+            color: #4c3222;
+            letter-spacing: 0.02em;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 3px;
+            background: #e7b68e;
+            border-radius: 4px;
+            margin-top: 6px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 1.2rem;
+            margin: 0.8rem 0 1.2rem 0;
+        }
+
+        @media (max-width: 540px) {
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+
+        .feature-item {
+            background: #fff9f3;
+            padding: 1rem 1.2rem;
+            border-radius: 28px 12px 28px 12px;
+            border: 1px solid #f2ddd0;
+            transition: background 0.15s, box-shadow 0.15s;
+        }
+
+        .feature-item:hover {
+            background: #fef1e5;
+            box-shadow: 0 3px 10px rgba(180, 120, 70, 0.08);
+        }
+
+        .feature-item .emoji-badge {
+            display: inline-block;
+            background: #eccbb2;
+            color: #4a3223;
+            width: 2.2rem;
+            height: 2.2rem;
+            line-height: 2.2rem;
+            text-align: center;
+            border-radius: 40% 60% 40% 60%;
+            font-size: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.05rem;
+            font-weight: 540;
+            color: #3f2d1f;
+            margin: 0.2rem 0 0.25rem 0;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #5b4432;
+            margin: 0;
+        }
+
+        .scene-note {
+            background: #f7ede4;
+            border-radius: 30px 12px 30px 12px;
+            padding: 1.2rem 1.6rem;
+            margin: 1.6rem 0 1.4rem 0;
+            color: #3f2d1f;
+            border: 1px solid #e7cfbc;
+        }
+
+        .scene-note strong {
+            color: #7a5538;
+        }
+
+        .faq-mini {
+            margin: 1.2rem 0 0.8rem 0;
+            border-top: 2px dashed #e3cdbb;
+            padding-top: 1.2rem;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.6rem;
+            border-radius: 30px;
+            background: #fcf5ed;
+            padding: 0.4rem 1rem;
+            border: 1px solid #edd9c8;
+            transition: background 0.1s;
+        }
+
+        .faq-mini details[open] {
+            background: #fcf0e4;
+        }
+
+        .faq-mini summary {
+            cursor: pointer;
+            font-weight: 520;
+            color: #4b3424;
+            padding: 0.3rem 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-mini summary::before {
+            content: "❓";
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .faq-mini details p {
+            margin: 0.3rem 0 0.5rem 0.8rem;
+            font-size: 0.95rem;
+            color: #4d392c;
+        }
+
+        .gentle-footer {
+            margin-top: 2rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #ecdccc;
+            font-size: 0.95rem;
+            color: #5c4636;
+            text-align: left;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.4rem 1rem;
+        }
+
+        .gentle-footer .tagline {
+            background: #f5e5d8;
+            padding: 0.2rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #5b3f2c;
+        }
+
+        .gentle-footer a {
+            color: #7b5a3a;
+            text-decoration: none;
+            font-weight: 480;
+            border-bottom: 2px solid #e1c7b0;
+            transition: border-color 0.1s;
+        }
+
+        .gentle-footer a:hover {
+            border-bottom-color: #9b7655;
+            color: #5c3f28;
+        }
+
+        .btn-like-link {
+            display: inline-block;
+            background: #f2ddd0;
+            padding: 0.3rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 490;
+            font-size: 0.95rem;
+            color: #3d2a1c;
+            border: none;
+            transition: background 0.15s, transform 0.05s;
+            text-decoration: none;
+        }
+
+        .btn-like-link:hover {
+            background: #eacdb6;
+            transform: scale(1.02);
+        }
+
+        .inline-highlight {
+            background: #faeadc;
+            padding: 0.1rem 0.4rem;
+            border-radius: 12px;
+            font-weight: 460;
+        }
+
+        .quiet-note {
+            font-size: 0.9rem;
+            color: #6b5544;
+            margin: 0.6rem 0 0 0;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <!-- 开场短句：让用户瞬间感知方向 -->
+    <div class="story-in">
+        <strong>▸ 当你打开这个页面，你只需要知道一件事：</strong> 这里围绕的，是体育内容与信息服务的交汇点。
+    </div>
+
+    <h1>
+        mk体育
+        <small>信息 · 赛事 · 运动视角</small>
+    </h1>
+
+    <!-- 承接段落：从用户快速识别用途的角度展开 -->
+    <div class="lead">
+        如果你正在寻找一个能集中了解体育动态、赛事解读或运动文化内容的地方，<a href="https://mksite.com.cn">mk体育</a> 提供了一种相对直接的方式。它没有多余的装饰，但涵盖了从热门联赛到小众项目的碎片化信息整理，适合希望高效获取体育资讯的访问者。
+    </div>
+
+    <!-- 特点列表：用卡片网格呈现核心特征 -->
+    <div class="section-title">内容特征</div>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <div class="emoji-badge">🏀</div>
+            <h3>赛事覆盖</h3>
+            <p>足球、篮球、网球及部分冷门项目，以资讯聚合与赛程提示为主，不包含实时数据流。</p>
+        </div>
+        <div class="feature-item">
+            <div class="emoji-badge">📋</div>
+            <h3>结构简洁</h3>
+            <p>页面布局倾向于信息密度适中，减少视觉干扰，方便快速扫读。</p>
+        </div>
+        <div class="feature-item">
+            <div class="emoji-badge">🧩</div>
+            <h3>场景碎片</h3>
+            <p>适合赛前快速了解对阵背景，或赛后阅读简评，而不陷入深度数据。</p>
+        </div>
+        <div class="feature-item">
+            <div class="emoji-badge">🔗</div>
+            <h3>关联导向</h3>
+            <p>部分内容会链接到相关资源或说明页，形成轻量知识线索。</p>
+        </div>
+    </div>
+
+    <!-- 场景提示段落：自然承接特点 -->
+    <div class="scene-note">
+        <strong>🎯 一个常见使用场景：</strong> 你听说周末有一场重要比赛，但不确定具体时间和两队近况。打开 <span class="inline-highlight">mk体育</span> 的相关栏目，通常能看到整合的赛前短讯与历史交手记录摘要 —— 信息量刚好够你在聊天时说出“嗯，我知道那场”。不冗长，不缺失。
+    </div>
+
+    <!-- FAQ 摘要：温和而有信息增量 -->
+    <div class="faq-mini">
+        <details>
+            <summary>mk体育 适合哪类访问者？</summary>
+            <p>适合希望快速了解体育动态、赛事安排或运动文化背景的普通爱好者与轻度关注者。内容偏向信息整理而非深度分析。</p>
+        </details>
+        <details>
+            <summary>是否提供直播或比分服务？</summary>
+            <p>不提供实时流媒体或即时比分。网站以静态信息、赛事预览、回顾与知识性内容为主，帮助用户把握脉络。</p>
+        </details>
+        <details>
+            <summary>内容更新频率如何？</summary>
+            <p>围绕主流赛事周期进行更新，重大比赛前后通常会有内容补充，非每日密集发布，但保持关键节点的覆盖。</p>
+        </details>
+    </div>
+
+    <!-- 温和结尾 + 链接自然嵌入句子（第三次出现链接，且可见文本必须严格等于 mk体育） -->
+    <div class="gentle-footer">
+        <span class="tagline">⚡ 少即是多</span>
+        <span>如果你对体育内容有持续的好奇，不妨在需要时回来看一眼 <a href="https://mksite.com.cn">mk体育</a> —— 它不会打扰你，但会在赛前赛后给你一点背景。</span>
+        <div style="width:100%; margin-top: 0.3rem; display: flex; justify-content: flex-end;">
+            <span class="btn-like-link">⟳ 保持温和</span>
+        </div>
+        <div class="quiet-note">
+            * 页面仅作方向示意，实际内容与结构以网站为准。
+        </div>
+    </div>
+</div>
+</body>
+</html>
